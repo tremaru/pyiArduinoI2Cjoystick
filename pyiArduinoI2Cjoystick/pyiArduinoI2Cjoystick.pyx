@@ -161,3 +161,17 @@ cdef class pyiArduinoI2Cjoystick():
         c = self.c_module.getCenY()
         u = self.c_module.getMaxY()
         return d, c, u
+
+    def __getattr__(self, item):
+
+        if item == 'x' or item == 'X':
+            return self.c_module.getPosition_X()
+
+        if item == 'y' or item == 'Y':
+            return self.c_module.getPosition_Y()
+
+        if item == 'ax' or item == 'AX':
+            return self.c_module.getADC_X()
+
+        if item == 'ay' or item == 'AY':
+            return self.c_module.getADC_Y()

@@ -999,6 +999,15 @@ static CYTHON_INLINE PyObject *__Pyx_PyCFunction_FastCall(PyObject *func, PyObje
 /* PyObjectCallOneArg.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
 
+/* IncludeStringH.proto */
+#include <string.h>
+
+/* BytesEquals.proto */
+static CYTHON_INLINE int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int equals);
+
+/* UnicodeEquals.proto */
+static CYTHON_INLINE int __Pyx_PyUnicode_Equals(PyObject* s1, PyObject* s2, int equals);
+
 /* PyThreadStateGet.proto */
 #if CYTHON_FAST_THREAD_STATE
 #define __Pyx_PyThreadState_declare  PyThreadState *__pyx_tstate;
@@ -1204,7 +1213,15 @@ int __pyx_module_is_main_pyiArduinoI2Cjoystick__pyiArduinoI2Cjoystick = 0;
 /* Implementation of 'pyiArduinoI2Cjoystick.pyiArduinoI2Cjoystick' */
 static PyObject *__pyx_builtin_print;
 static PyObject *__pyx_builtin_TypeError;
+static const char __pyx_k_X[] = "X";
+static const char __pyx_k_Y[] = "Y";
 static const char __pyx_k_f[] = "f";
+static const char __pyx_k_x[] = "x";
+static const char __pyx_k_y[] = "y";
+static const char __pyx_k_AX[] = "AX";
+static const char __pyx_k_AY[] = "AY";
+static const char __pyx_k_ax[] = "ax";
+static const char __pyx_k_ay[] = "ay";
 static const char __pyx_k_auto[] = "auto";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
@@ -1275,6 +1292,8 @@ static const char __pyx_k_pyiArduinoI2Cjoystick[] = "pyiArduinoI2Cjoystick";
 static const char __pyx_k_I2C_raspi_config_https_wiki_iar[] = "\320\276\321\210\320\270\320\261\320\272\320\260 \320\270\320\275\320\270\321\206\320\270\320\260\320\273\320\270\320\267\320\260\321\206\320\270\320\270 \320\274\320\276\320\264\321\203\320\273\321\217.\n\320\237\321\200\320\276\320\262\320\265\321\200\321\214\321\202\320\265 \320\277\320\276\320\264\320\272\320\273\321\216\321\207\320\265\320\275\320\270\320\265 \320\270 \320\260\320\264\321\200\320\265\321\201 \320\274\320\276\320\264\321\203\320\273\321\217, \320\262\320\276\320\267\320\274\320\276\320\266\320\275\320\276 \320\275\320\265 \320\262\320\272\320\273\321\216\321\207\320\265\320\275 \320\270\320\275\321\202\320\265\321\200\321\204\320\265\320\271\321\201 I2C.\n \320\227\320\260\320\277\321\203\321\201\321\202\320\270\321\202\320\265 raspi-config \320\270 \320\262\320\272\320\273\321\216\321\207\320\270\321\202\320\265 \320\270\320\275\321\202\320\265\321\200\321\204\320\265\320\271\321\201, \320\270\320\275\321\201\321\202\321\200\321\203\320\272\321\206\320\270\321\217 \320\277\320\276 \320\262\320\272\320\273\321\216\321\207\320\265\320\275\320\270\321\216: https://wiki.iarduino.ru/page/raspberry-i2c-spi/";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
 static const char __pyx_k_I2C_raspi_config_https_wiki_iar_2[] = "\320\276\321\210\320\270\320\261\320\272\320\260 \320\270\320\275\320\270\321\206\320\270\320\260\320\273\320\270\320\267\320\260\321\206\320\270\320\270 \320\274\320\276\320\264\321\203\320\273\321\217.\n\320\237\321\200\320\276\320\262\320\265\321\200\321\214\321\202\320\265 \320\277\320\276\320\264\320\272\320\273\321\216\321\207\320\265\320\275\320\270\320\265 \320\270 \320\260\320\264\321\200\320\265\321\201 \320\274\320\276\320\264\321\203\320\273\321\217,  \320\262\320\276\320\267\320\274\320\276\320\266\320\275\320\276 \320\275\320\265 \320\262\320\272\320\273\321\216\321\207\320\265\320\275 \320\270\320\275\321\202\320\265\321\200\321\204\320\265\320\271\321\201 I2C.\n \320\227\320\260\320\277\321\203\321\201\321\202\320\270\321\202\320\265 raspi-config \320\270 \320\262\320\272\320\273\321\216\321\207\320\270\321\202\320\265 \320\270\320\275\321\202\320\265\321\200\321\204\320\265\320\271\321\201, \320\270\320\275\321\201\321\202\321\200\321\203\320\272\321\206\320\270\321\217 \320\277\320\276 \320\262\320\272\320\273\321\216\321\207\320\265\320\275\320\270\321\216: https://wiki.iarduino.ru/page/raspberry-i2c-spi/";
+static PyObject *__pyx_n_u_AX;
+static PyObject *__pyx_n_u_AY;
 static PyObject *__pyx_n_s_DEF_CHIP_ID_FLASH;
 static PyObject *__pyx_n_s_DEF_CHIP_ID_METRO;
 static PyObject *__pyx_kp_u_I2C_raspi_config_https_wiki_iar;
@@ -1320,8 +1339,12 @@ static PyObject *__pyx_n_s_REG_JOY_Y_UP_L;
 static PyObject *__pyx_n_s_REG_MODEL;
 static PyObject *__pyx_n_s_REG_VERSION;
 static PyObject *__pyx_n_s_TypeError;
+static PyObject *__pyx_n_u_X;
+static PyObject *__pyx_n_u_Y;
 static PyObject *__pyx_n_s_address;
 static PyObject *__pyx_n_s_auto;
+static PyObject *__pyx_n_u_ax;
+static PyObject *__pyx_n_u_ay;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_f;
 static PyObject *__pyx_n_s_getADC_X;
@@ -1340,9 +1363,11 @@ static PyObject *__pyx_n_s_reduce_ex;
 static PyObject *__pyx_n_s_setstate;
 static PyObject *__pyx_n_s_setstate_cython;
 static PyObject *__pyx_n_s_test;
+static PyObject *__pyx_n_u_x;
 static PyObject *__pyx_n_s_x_cen;
 static PyObject *__pyx_n_s_x_max;
 static PyObject *__pyx_n_s_x_min;
+static PyObject *__pyx_n_u_y;
 static PyObject *__pyx_n_s_y_cen;
 static PyObject *__pyx_n_s_y_max;
 static PyObject *__pyx_n_s_y_min;
@@ -1367,8 +1392,9 @@ static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiA
 static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_36getADC(struct __pyx_obj_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_38getCalibration_X(struct __pyx_obj_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_40getCalibration_Y(struct __pyx_obj_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_42__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_44__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_42__getattr__(struct __pyx_obj_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick *__pyx_v_self, PyObject *__pyx_v_item); /* proto */
+static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_44__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_46__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_tp_new_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
@@ -3256,6 +3282,7 @@ static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiA
  *         c = self.c_module.getCenY()
  *         u = self.c_module.getMaxY()             # <<<<<<<<<<<<<<
  *         return d, c, u
+ * 
  */
   __pyx_v_u = __pyx_v_self->c_module.getMaxY();
 
@@ -3263,6 +3290,8 @@ static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiA
  *         c = self.c_module.getCenY()
  *         u = self.c_module.getMaxY()
  *         return d, c, u             # <<<<<<<<<<<<<<
+ * 
+ *     def __getattr__(self, item):
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_d); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
@@ -3308,6 +3337,216 @@ static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiA
   return __pyx_r;
 }
 
+/* "pyiArduinoI2Cjoystick/pyiArduinoI2Cjoystick.pyx":165
+ *         return d, c, u
+ * 
+ *     def __getattr__(self, item):             # <<<<<<<<<<<<<<
+ * 
+ *         if item == 'x' or item == 'X':
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_43__getattr__(PyObject *__pyx_v_self, PyObject *__pyx_v_item); /*proto*/
+static PyObject *__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_43__getattr__(PyObject *__pyx_v_self, PyObject *__pyx_v_item) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__getattr__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_42__getattr__(((struct __pyx_obj_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick *)__pyx_v_self), ((PyObject *)__pyx_v_item));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_42__getattr__(struct __pyx_obj_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick *__pyx_v_self, PyObject *__pyx_v_item) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  int __pyx_t_2;
+  PyObject *__pyx_t_3 = NULL;
+  __Pyx_RefNannySetupContext("__getattr__", 0);
+
+  /* "pyiArduinoI2Cjoystick/pyiArduinoI2Cjoystick.pyx":167
+ *     def __getattr__(self, item):
+ * 
+ *         if item == 'x' or item == 'X':             # <<<<<<<<<<<<<<
+ *             return self.c_module.getPosition_X()
+ * 
+ */
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_item, __pyx_n_u_x, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 167, __pyx_L1_error)
+  if (!__pyx_t_2) {
+  } else {
+    __pyx_t_1 = __pyx_t_2;
+    goto __pyx_L4_bool_binop_done;
+  }
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_item, __pyx_n_u_X, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 167, __pyx_L1_error)
+  __pyx_t_1 = __pyx_t_2;
+  __pyx_L4_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "pyiArduinoI2Cjoystick/pyiArduinoI2Cjoystick.pyx":168
+ * 
+ *         if item == 'x' or item == 'X':
+ *             return self.c_module.getPosition_X()             # <<<<<<<<<<<<<<
+ * 
+ *         if item == 'y' or item == 'Y':
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_self->c_module.getPosition_X()); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 168, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_r = __pyx_t_3;
+    __pyx_t_3 = 0;
+    goto __pyx_L0;
+
+    /* "pyiArduinoI2Cjoystick/pyiArduinoI2Cjoystick.pyx":167
+ *     def __getattr__(self, item):
+ * 
+ *         if item == 'x' or item == 'X':             # <<<<<<<<<<<<<<
+ *             return self.c_module.getPosition_X()
+ * 
+ */
+  }
+
+  /* "pyiArduinoI2Cjoystick/pyiArduinoI2Cjoystick.pyx":170
+ *             return self.c_module.getPosition_X()
+ * 
+ *         if item == 'y' or item == 'Y':             # <<<<<<<<<<<<<<
+ *             return self.c_module.getPosition_Y()
+ * 
+ */
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_item, __pyx_n_u_y, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 170, __pyx_L1_error)
+  if (!__pyx_t_2) {
+  } else {
+    __pyx_t_1 = __pyx_t_2;
+    goto __pyx_L7_bool_binop_done;
+  }
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_item, __pyx_n_u_Y, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 170, __pyx_L1_error)
+  __pyx_t_1 = __pyx_t_2;
+  __pyx_L7_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "pyiArduinoI2Cjoystick/pyiArduinoI2Cjoystick.pyx":171
+ * 
+ *         if item == 'y' or item == 'Y':
+ *             return self.c_module.getPosition_Y()             # <<<<<<<<<<<<<<
+ * 
+ *         if item == 'ax' or item == 'AX':
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_self->c_module.getPosition_Y()); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 171, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_r = __pyx_t_3;
+    __pyx_t_3 = 0;
+    goto __pyx_L0;
+
+    /* "pyiArduinoI2Cjoystick/pyiArduinoI2Cjoystick.pyx":170
+ *             return self.c_module.getPosition_X()
+ * 
+ *         if item == 'y' or item == 'Y':             # <<<<<<<<<<<<<<
+ *             return self.c_module.getPosition_Y()
+ * 
+ */
+  }
+
+  /* "pyiArduinoI2Cjoystick/pyiArduinoI2Cjoystick.pyx":173
+ *             return self.c_module.getPosition_Y()
+ * 
+ *         if item == 'ax' or item == 'AX':             # <<<<<<<<<<<<<<
+ *             return self.c_module.getADC_X()
+ * 
+ */
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_item, __pyx_n_u_ax, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 173, __pyx_L1_error)
+  if (!__pyx_t_2) {
+  } else {
+    __pyx_t_1 = __pyx_t_2;
+    goto __pyx_L10_bool_binop_done;
+  }
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_item, __pyx_n_u_AX, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_1 = __pyx_t_2;
+  __pyx_L10_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "pyiArduinoI2Cjoystick/pyiArduinoI2Cjoystick.pyx":174
+ * 
+ *         if item == 'ax' or item == 'AX':
+ *             return self.c_module.getADC_X()             # <<<<<<<<<<<<<<
+ * 
+ *         if item == 'ay' or item == 'AY':
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_self->c_module.getADC_X()); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_r = __pyx_t_3;
+    __pyx_t_3 = 0;
+    goto __pyx_L0;
+
+    /* "pyiArduinoI2Cjoystick/pyiArduinoI2Cjoystick.pyx":173
+ *             return self.c_module.getPosition_Y()
+ * 
+ *         if item == 'ax' or item == 'AX':             # <<<<<<<<<<<<<<
+ *             return self.c_module.getADC_X()
+ * 
+ */
+  }
+
+  /* "pyiArduinoI2Cjoystick/pyiArduinoI2Cjoystick.pyx":176
+ *             return self.c_module.getADC_X()
+ * 
+ *         if item == 'ay' or item == 'AY':             # <<<<<<<<<<<<<<
+ *             return self.c_module.getADC_Y()
+ */
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_item, __pyx_n_u_ay, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 176, __pyx_L1_error)
+  if (!__pyx_t_2) {
+  } else {
+    __pyx_t_1 = __pyx_t_2;
+    goto __pyx_L13_bool_binop_done;
+  }
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_item, __pyx_n_u_AY, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_1 = __pyx_t_2;
+  __pyx_L13_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "pyiArduinoI2Cjoystick/pyiArduinoI2Cjoystick.pyx":177
+ * 
+ *         if item == 'ay' or item == 'AY':
+ *             return self.c_module.getADC_Y()             # <<<<<<<<<<<<<<
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_self->c_module.getADC_Y()); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_r = __pyx_t_3;
+    __pyx_t_3 = 0;
+    goto __pyx_L0;
+
+    /* "pyiArduinoI2Cjoystick/pyiArduinoI2Cjoystick.pyx":176
+ *             return self.c_module.getADC_X()
+ * 
+ *         if item == 'ay' or item == 'AY':             # <<<<<<<<<<<<<<
+ *             return self.c_module.getADC_Y()
+ */
+  }
+
+  /* "pyiArduinoI2Cjoystick/pyiArduinoI2Cjoystick.pyx":165
+ *         return d, c, u
+ * 
+ *     def __getattr__(self, item):             # <<<<<<<<<<<<<<
+ * 
+ *         if item == 'x' or item == 'X':
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("pyiArduinoI2Cjoystick.pyiArduinoI2Cjoystick.pyiArduinoI2Cjoystick.__getattr__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
@@ -3315,19 +3554,19 @@ static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiA
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_43__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_43__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_45__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_45__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_42__reduce_cython__(((struct __pyx_obj_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick *)__pyx_v_self));
+  __pyx_r = __pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_44__reduce_cython__(((struct __pyx_obj_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_42__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick *__pyx_v_self) {
+static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_44__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3369,19 +3608,19 @@ static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiA
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_45__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_45__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_47__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_47__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_44__setstate_cython__(((struct __pyx_obj_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_46__setstate_cython__(((struct __pyx_obj_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_44__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_46__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3444,6 +3683,15 @@ static void __pyx_tp_dealloc_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyi
   (*Py_TYPE(o)->tp_free)(o);
 }
 
+static PyObject *__pyx_tp_getattro_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick(PyObject *o, PyObject *n) {
+  PyObject *v = __Pyx_PyObject_GenericGetAttr(o, n);
+  if (!v && PyErr_ExceptionMatches(PyExc_AttributeError)) {
+    PyErr_Clear();
+    v = __pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_43__getattr__(o, n);
+  }
+  return v;
+}
+
 static PyMethodDef __pyx_methods_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick[] = {
   {"begin", (PyCFunction)__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_3begin, METH_NOARGS, 0},
   {"changeAddress", (PyCFunction)__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_5changeAddress, METH_O, 0},
@@ -3465,8 +3713,9 @@ static PyMethodDef __pyx_methods_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick
   {"getADC", (PyCFunction)__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_37getADC, METH_NOARGS, 0},
   {"getCalibration_X", (PyCFunction)__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_39getCalibration_X, METH_NOARGS, 0},
   {"getCalibration_Y", (PyCFunction)__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_41getCalibration_Y, METH_NOARGS, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_43__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_45__setstate_cython__, METH_O, 0},
+  {"__getattr__", (PyCFunction)__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_43__getattr__, METH_O|METH_COEXIST, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_45__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_47__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
@@ -3492,7 +3741,7 @@ static PyTypeObject __pyx_type_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_p
   0, /*tp_hash*/
   0, /*tp_call*/
   0, /*tp_str*/
-  0, /*tp_getattro*/
+  __pyx_tp_getattro_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick, /*tp_getattro*/
   0, /*tp_setattro*/
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE, /*tp_flags*/
@@ -3577,6 +3826,8 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_n_u_AX, __pyx_k_AX, sizeof(__pyx_k_AX), 0, 1, 0, 1},
+  {&__pyx_n_u_AY, __pyx_k_AY, sizeof(__pyx_k_AY), 0, 1, 0, 1},
   {&__pyx_n_s_DEF_CHIP_ID_FLASH, __pyx_k_DEF_CHIP_ID_FLASH, sizeof(__pyx_k_DEF_CHIP_ID_FLASH), 0, 0, 1, 1},
   {&__pyx_n_s_DEF_CHIP_ID_METRO, __pyx_k_DEF_CHIP_ID_METRO, sizeof(__pyx_k_DEF_CHIP_ID_METRO), 0, 0, 1, 1},
   {&__pyx_kp_u_I2C_raspi_config_https_wiki_iar, __pyx_k_I2C_raspi_config_https_wiki_iar, sizeof(__pyx_k_I2C_raspi_config_https_wiki_iar), 0, 1, 0, 0},
@@ -3622,8 +3873,12 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_REG_MODEL, __pyx_k_REG_MODEL, sizeof(__pyx_k_REG_MODEL), 0, 0, 1, 1},
   {&__pyx_n_s_REG_VERSION, __pyx_k_REG_VERSION, sizeof(__pyx_k_REG_VERSION), 0, 0, 1, 1},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
+  {&__pyx_n_u_X, __pyx_k_X, sizeof(__pyx_k_X), 0, 1, 0, 1},
+  {&__pyx_n_u_Y, __pyx_k_Y, sizeof(__pyx_k_Y), 0, 1, 0, 1},
   {&__pyx_n_s_address, __pyx_k_address, sizeof(__pyx_k_address), 0, 0, 1, 1},
   {&__pyx_n_s_auto, __pyx_k_auto, sizeof(__pyx_k_auto), 0, 0, 1, 1},
+  {&__pyx_n_u_ax, __pyx_k_ax, sizeof(__pyx_k_ax), 0, 1, 0, 1},
+  {&__pyx_n_u_ay, __pyx_k_ay, sizeof(__pyx_k_ay), 0, 1, 0, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_f, __pyx_k_f, sizeof(__pyx_k_f), 0, 0, 1, 1},
   {&__pyx_n_s_getADC_X, __pyx_k_getADC_X, sizeof(__pyx_k_getADC_X), 0, 0, 1, 1},
@@ -3642,9 +3897,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_setstate, __pyx_k_setstate, sizeof(__pyx_k_setstate), 0, 0, 1, 1},
   {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
+  {&__pyx_n_u_x, __pyx_k_x, sizeof(__pyx_k_x), 0, 1, 0, 1},
   {&__pyx_n_s_x_cen, __pyx_k_x_cen, sizeof(__pyx_k_x_cen), 0, 0, 1, 1},
   {&__pyx_n_s_x_max, __pyx_k_x_max, sizeof(__pyx_k_x_max), 0, 0, 1, 1},
   {&__pyx_n_s_x_min, __pyx_k_x_min, sizeof(__pyx_k_x_min), 0, 0, 1, 1},
+  {&__pyx_n_u_y, __pyx_k_y, sizeof(__pyx_k_y), 0, 1, 0, 1},
   {&__pyx_n_s_y_cen, __pyx_k_y_cen, sizeof(__pyx_k_y_cen), 0, 0, 1, 1},
   {&__pyx_n_s_y_max, __pyx_k_y_max, sizeof(__pyx_k_y_max), 0, 0, 1, 1},
   {&__pyx_n_s_y_min, __pyx_k_y_min, sizeof(__pyx_k_y_min), 0, 0, 1, 1},
@@ -3782,9 +4039,6 @@ static int __Pyx_modinit_type_init_code(void) {
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick.tp_print = 0;
   #endif
-  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick.tp_dictoffset && __pyx_type_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick.tp_getattro == PyObject_GenericGetAttr)) {
-    __pyx_type_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick.tp_getattro = __Pyx_PyObject_GenericGetAttr;
-  }
   if (PyObject_SetAttr(__pyx_m, __pyx_n_s_pyiArduinoI2Cjoystick, (PyObject *)&__pyx_type_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
   if (__Pyx_setup_reduce((PyObject*)&__pyx_type_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
   __pyx_ptype_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick = &__pyx_type_21pyiArduinoI2Cjoystick_21pyiArduinoI2Cjoystick_pyiArduinoI2Cjoystick;
@@ -4859,6 +5113,155 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObjec
     return result;
 }
 #endif
+
+/* BytesEquals */
+static CYTHON_INLINE int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int equals) {
+#if CYTHON_COMPILING_IN_PYPY
+    return PyObject_RichCompareBool(s1, s2, equals);
+#else
+    if (s1 == s2) {
+        return (equals == Py_EQ);
+    } else if (PyBytes_CheckExact(s1) & PyBytes_CheckExact(s2)) {
+        const char *ps1, *ps2;
+        Py_ssize_t length = PyBytes_GET_SIZE(s1);
+        if (length != PyBytes_GET_SIZE(s2))
+            return (equals == Py_NE);
+        ps1 = PyBytes_AS_STRING(s1);
+        ps2 = PyBytes_AS_STRING(s2);
+        if (ps1[0] != ps2[0]) {
+            return (equals == Py_NE);
+        } else if (length == 1) {
+            return (equals == Py_EQ);
+        } else {
+            int result;
+#if CYTHON_USE_UNICODE_INTERNALS
+            Py_hash_t hash1, hash2;
+            hash1 = ((PyBytesObject*)s1)->ob_shash;
+            hash2 = ((PyBytesObject*)s2)->ob_shash;
+            if (hash1 != hash2 && hash1 != -1 && hash2 != -1) {
+                return (equals == Py_NE);
+            }
+#endif
+            result = memcmp(ps1, ps2, (size_t)length);
+            return (equals == Py_EQ) ? (result == 0) : (result != 0);
+        }
+    } else if ((s1 == Py_None) & PyBytes_CheckExact(s2)) {
+        return (equals == Py_NE);
+    } else if ((s2 == Py_None) & PyBytes_CheckExact(s1)) {
+        return (equals == Py_NE);
+    } else {
+        int result;
+        PyObject* py_result = PyObject_RichCompare(s1, s2, equals);
+        if (!py_result)
+            return -1;
+        result = __Pyx_PyObject_IsTrue(py_result);
+        Py_DECREF(py_result);
+        return result;
+    }
+#endif
+}
+
+/* UnicodeEquals */
+static CYTHON_INLINE int __Pyx_PyUnicode_Equals(PyObject* s1, PyObject* s2, int equals) {
+#if CYTHON_COMPILING_IN_PYPY
+    return PyObject_RichCompareBool(s1, s2, equals);
+#else
+#if PY_MAJOR_VERSION < 3
+    PyObject* owned_ref = NULL;
+#endif
+    int s1_is_unicode, s2_is_unicode;
+    if (s1 == s2) {
+        goto return_eq;
+    }
+    s1_is_unicode = PyUnicode_CheckExact(s1);
+    s2_is_unicode = PyUnicode_CheckExact(s2);
+#if PY_MAJOR_VERSION < 3
+    if ((s1_is_unicode & (!s2_is_unicode)) && PyString_CheckExact(s2)) {
+        owned_ref = PyUnicode_FromObject(s2);
+        if (unlikely(!owned_ref))
+            return -1;
+        s2 = owned_ref;
+        s2_is_unicode = 1;
+    } else if ((s2_is_unicode & (!s1_is_unicode)) && PyString_CheckExact(s1)) {
+        owned_ref = PyUnicode_FromObject(s1);
+        if (unlikely(!owned_ref))
+            return -1;
+        s1 = owned_ref;
+        s1_is_unicode = 1;
+    } else if (((!s2_is_unicode) & (!s1_is_unicode))) {
+        return __Pyx_PyBytes_Equals(s1, s2, equals);
+    }
+#endif
+    if (s1_is_unicode & s2_is_unicode) {
+        Py_ssize_t length;
+        int kind;
+        void *data1, *data2;
+        if (unlikely(__Pyx_PyUnicode_READY(s1) < 0) || unlikely(__Pyx_PyUnicode_READY(s2) < 0))
+            return -1;
+        length = __Pyx_PyUnicode_GET_LENGTH(s1);
+        if (length != __Pyx_PyUnicode_GET_LENGTH(s2)) {
+            goto return_ne;
+        }
+#if CYTHON_USE_UNICODE_INTERNALS
+        {
+            Py_hash_t hash1, hash2;
+        #if CYTHON_PEP393_ENABLED
+            hash1 = ((PyASCIIObject*)s1)->hash;
+            hash2 = ((PyASCIIObject*)s2)->hash;
+        #else
+            hash1 = ((PyUnicodeObject*)s1)->hash;
+            hash2 = ((PyUnicodeObject*)s2)->hash;
+        #endif
+            if (hash1 != hash2 && hash1 != -1 && hash2 != -1) {
+                goto return_ne;
+            }
+        }
+#endif
+        kind = __Pyx_PyUnicode_KIND(s1);
+        if (kind != __Pyx_PyUnicode_KIND(s2)) {
+            goto return_ne;
+        }
+        data1 = __Pyx_PyUnicode_DATA(s1);
+        data2 = __Pyx_PyUnicode_DATA(s2);
+        if (__Pyx_PyUnicode_READ(kind, data1, 0) != __Pyx_PyUnicode_READ(kind, data2, 0)) {
+            goto return_ne;
+        } else if (length == 1) {
+            goto return_eq;
+        } else {
+            int result = memcmp(data1, data2, (size_t)(length * kind));
+            #if PY_MAJOR_VERSION < 3
+            Py_XDECREF(owned_ref);
+            #endif
+            return (equals == Py_EQ) ? (result == 0) : (result != 0);
+        }
+    } else if ((s1 == Py_None) & s2_is_unicode) {
+        goto return_ne;
+    } else if ((s2 == Py_None) & s1_is_unicode) {
+        goto return_ne;
+    } else {
+        int result;
+        PyObject* py_result = PyObject_RichCompare(s1, s2, equals);
+        #if PY_MAJOR_VERSION < 3
+        Py_XDECREF(owned_ref);
+        #endif
+        if (!py_result)
+            return -1;
+        result = __Pyx_PyObject_IsTrue(py_result);
+        Py_DECREF(py_result);
+        return result;
+    }
+return_eq:
+    #if PY_MAJOR_VERSION < 3
+    Py_XDECREF(owned_ref);
+    #endif
+    return (equals == Py_EQ);
+return_ne:
+    #if PY_MAJOR_VERSION < 3
+    Py_XDECREF(owned_ref);
+    #endif
+    return (equals == Py_NE);
+#endif
+}
 
 /* PyErrFetchRestore */
 #if CYTHON_FAST_THREAD_STATE
