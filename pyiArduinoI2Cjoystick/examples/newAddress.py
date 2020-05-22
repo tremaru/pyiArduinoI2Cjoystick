@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # ПРИМЕР СМЕНЫ АДРЕСА МОДУЛЯ:
 
 # Подключаем библиотеку для работы с датчиком температуры и влажности
@@ -21,7 +22,7 @@ else:
 
 # Если датчик найден
 if module.begin():
-    print("Найден датчик %#.2x" % module.getAddress())
+    print("Найден модуль %#.2x" % module.getAddress())
 
     # Если адрес удалось изменить
     if module.changeAddress(newAddress):

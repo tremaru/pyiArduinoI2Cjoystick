@@ -1,8 +1,23 @@
 // ДАННЫЙ ПРИМЕР ВЫВОДИТ НАПРАВЛЕНИЯ ДЖОЙСТИКА:   // * Строки со звёздочкой являются необязательными.
                                                   //
-#include <Wire.h>                                 // * Подключаем библиотеку для работы с аппаратной шиной I2C.
-#include <iarduino_I2C_Joystick.h>                //   Подключаем библиотеку для работы с джойстиком I2C-flash.
+#include <iostream>
+#include <math.h>
+#include "../iarduino_I2C_Joystick.h"             //   Подключаем библиотеку для работы с джойстиком I2C-flash.
 iarduino_I2C_Joystick joy(0x09);                  //   Объявляем объект joy для работы с функциями и методами библиотеки iarduino_I2C_Joystick, указывая адрес модуля на шине I2C.
+
+class vpadlu {
+        public:
+                void begin(int) {;};
+                template<typename T> void println(T arg)
+                {
+                        std::cout << arg << '\n' << std::flush;
+                }
+                template<typename T> void print(T arg)
+                {
+                        std::cout << arg << std::flush;
+                }
+                operator bool() { return true; }
+} Serial;
                                                   //   Если объявить объект без указания адреса (iarduino_I2C_Joystick joy;), то адрес будет найден автоматически.
 int x,y,a;                                        //   Объявляем переменные для получения координат «x»,«y» и рассчёта угла смещения джойстика «a».
                                                   //
@@ -78,3 +93,11 @@ void loop(){                                      //
     if(  x || y  ){Serial.println( "\r\n\r\n" );} // * Если джойстик смещён, то добавляем три пустые строки.
     delay(200);                                   // *
 }                                                 //
+
+int main()
+{
+	setup();
+	for (;;) {
+		loop();
+	}
+}
