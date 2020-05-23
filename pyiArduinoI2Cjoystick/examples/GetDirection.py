@@ -10,37 +10,23 @@ from pyiArduinoI2Cjoystick import *
 # Объявляем объект joy для работы с библиотекой, указывая адрес модуля на шине.
 j = pyiArduinoI2Cjoystick(0x09)
 
-# Сохраняем текущую калибровку джойстика
-xa, xb, xc = j.getCalibration_X()
-ya, yb, yc = j.getCalibration_Y()
 
-# Меняем направления осей
-j.setCalibration_X(4095, 2048, 0)
-j.setCalibration_Y(4095, 2048, 0)
+print("Выводим положение джойстика в полярной системе координат.")
+print("Для выхода нажмите <ctrl+c>")
 
-try:
+while True:
 
-    print("Выводим положение джойстика в полярной системе координат.")
-    print("Для выхода нажмите <ctrl+c>")
+    # Получаем текущие координаты
+    x, y = j.x, j.y
 
-    while True:
+    # Вычисляем радианы
+    rad = atan2(y,x)
+    deg = rad * (180 / pi)
 
-        # Получаем текущие координаты
-        x, y = j.x, j.y
+    if deg < 0:
+        deg = deg + 360
 
-        # Вычисляем радианы
-        rad = atan2(y,x)
-        deg = rad * (180 / pi)
+    # Выводим градусы
+    print(round(deg))
 
-        if deg < 0:
-            deg = deg + 360
-
-        # Выводим градусы
-        print(round(deg))
-
-        sleep(.1)
-except:
-
-    # Возвращаем калибровку джойстика в исходную
-    j.setCalibration_X(xa, xb, xc)
-    j.setCalibration_Y(ya, yb, yc)
+    sleep(.1)
